@@ -1,7 +1,7 @@
 import services
 import os
-from super_job_api import get_sj_vacancies_by_languages
-from hh_api import get_hh_vacancies_by_languages
+from api.super_job_api import get_sj_vacancies_by_languages
+from api.hh_api import get_hh_vacancies_by_languages
 from dotenv import load_dotenv
 
 
