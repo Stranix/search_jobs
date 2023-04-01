@@ -1,0 +1,10 @@
+.idea/
+.env
+env/
+tests/
+.pytest_cache/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
