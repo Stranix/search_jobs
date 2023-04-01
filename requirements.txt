@@ -1,5 +1,3 @@
 requests
 terminaltables
 python-dotenv
-pytest
-pytest-mock
