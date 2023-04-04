@@ -67,10 +67,10 @@ def get_hh_vacancies_by_name_with_paginations(
     page = 0
     pages_number = 1
     vacancies = []
-    search_params.update({'text': f'"{name}"'})
+    search_params['text'] = f'"{name}"'
 
     while page < pages_number:
-        search_params.update({'page': page})
+        search_params['page'] = page
         response_hh_api = services.send_request_to_hh_api(
             'vacancies',
             search_params
