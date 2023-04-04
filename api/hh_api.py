@@ -8,7 +8,9 @@ def get_hh_industries() -> list[schemas.CompanyIndustry]:
 
     industries = []
     for industry_area in response_hh_api:
-        company_industry = hh_api_parser.parse_hh_response_industry(industry_area)
+        company_industry = hh_api_parser.parse_hh_response_industry(
+            industry_area
+        )
         industries.append(company_industry)
 
     return industries
@@ -31,12 +33,22 @@ def get_hh_specialization_by_name(name: str) -> schemas.Specialization | None:
                 return specialization
 
 
-def get_hh_vacancies_by_languages(languages: list[str], search_params: dict) -> dict:
+def get_hh_vacancies_by_languages(
+        languages: list[str],
+        search_params: dict
+) -> dict:
+
     vacancies_by_languages = {}
 
     for language in languages:
-        vacancies = get_hh_vacancies_by_name_with_paginations(language, search_params)
-        vacancies_processed, average_salary = services.get_average_salary(vacancies)
+        vacancies = get_hh_vacancies_by_name_with_paginations(
+            language,
+            search_params
+        )
+
+        vacancies_processed, average_salary = services.get_average_salary(
+            vacancies
+        )
 
         vacancies_by_languages[language] = {
             'vacancies_found': len(vacancies),
@@ -47,7 +59,11 @@ def get_hh_vacancies_by_languages(languages: list[str], search_params: dict) -> 
     return vacancies_by_languages
 
 
-def get_hh_vacancies_by_name_with_paginations(name: str, search_params: dict) -> list[schemas.Vacancy]:
+def get_hh_vacancies_by_name_with_paginations(
+        name: str,
+        search_params: dict
+) -> list[schemas.Vacancy]:
+
     page = 0
     pages_number = 1
     vacancies = []
@@ -55,10 +71,17 @@ def get_hh_vacancies_by_name_with_paginations(name: str, search_params: dict) ->
 
     while page < pages_number:
         search_params.update({'page': page})
-        response_hh_api = services.send_request_to_hh_api('vacancies', search_params)
+        response_hh_api = services.send_request_to_hh_api(
+            'vacancies',
+            search_params
+        )
         pages_number = int(response_hh_api['pages'])
         for vacancy in response_hh_api['items']:
-            vacancies.append(hh_api_parser.parse_hh_response_vacancy(vacancy))
+            vacancies.append(
+                hh_api_parser.parse_hh_response_vacancy(
+                    vacancy
+                )
+            )
         page += 1
 
     return vacancies

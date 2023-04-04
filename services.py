@@ -14,7 +14,12 @@ def send_request_to_hh_api(point: str, params: dict = None) -> dict:
     return response.json()
 
 
-def send_request_to_sj_api(api_token: str, point: str, params: dict = None) -> dict:
+def send_request_to_sj_api(
+        api_token: str,
+        point: str,
+        params: dict = None
+) -> dict:
+
     url = f'https://api.superjob.ru/2.20/{point}'
     headers = {
         'User-Agent': 'TestDev/1.0 (Phantom2525@gmail.com)',
@@ -26,7 +31,11 @@ def send_request_to_sj_api(api_token: str, point: str, params: dict = None) -> d
     return response.json()
 
 
-def get_average_salary(vacancies: list[schemas.Vacancy], currency: str = 'RUR') -> tuple[int, float]:
+def get_average_salary(
+        vacancies: list[schemas.Vacancy],
+        currency: str = 'RUR'
+) -> tuple[int, float]:
+
     salaries = []
 
     for vacancy in vacancies:
@@ -54,11 +63,21 @@ def predict_salary(vacancy: schemas.Vacancy) -> float:
 
 
 def print_language_table(language_data: dict, table_name: str):
-    headers = ['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']
+    headers = [
+        'Язык программирования',
+        'Вакансий найдено',
+        'Вакансий обработано',
+        'Средняя зарплата'
+    ]
     table_data = [headers]
 
     for language, stats in language_data.items():
-        line = [language, stats['vacancies_found'], stats['vacancies_processed'], stats['average_salary']]
+        line = [
+            language,
+            stats['vacancies_found'],
+            stats['vacancies_processed'],
+            stats['average_salary']
+        ]
         table_data.append(line)
 
     table_instance = AsciiTable(table_data, table_name)
