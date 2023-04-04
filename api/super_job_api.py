@@ -17,7 +17,7 @@ def get_sj_vacancies_by_name_with_paginations(
     })
 
     while True:
-        search_params.update({'page': page})
+        search_params['page'] = page
         response_sj_api = services.send_request_to_sj_api(
             api_token,
             'vacancies',
