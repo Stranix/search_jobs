@@ -1,16 +1,28 @@
 # search_jobs
 
 Данный репозиторий содержит примеры кода для поиска вакансий по популярным языкам программирования.  
-Поиск осуществляется на сайтах hh.ru и superjob.ru с использованием их API.
+Поиск осуществляется на сайтах [hh.ru](https://dev.hh.ru/) 
+и [superjob.ru](https://api.superjob.ru/) с использованием их API.
 
 ## Использование
 1. Скачайте репозиторий:
-```git clone https://github.com/Stranix/search_jobs.git```
+```git
+git clone https://github.com/Stranix/search_jobs.git
+```
 2. Установите зависимости:
-```pip install -r requirements.txt```  
-3. Получите API-ключ для сайтa поиска вакансий superjob. Необходимо зарегистрировать приложение и получить ключ API
-4. Вставьте полученные ключи в файл .env в корневой директории проекта: ```SUPERJOB_API_KEY=ваш_ключ_api_от_superjob```
-5. Запустите нужный скрипт: ```python3 main.py```
+```python
+pip install -r requirements.txt
+```  
+3. Получите API-ключ для сайтa поиска вакансий [superjob.](https://api.superjob.ru/)  
+Необходимо [зарегистрировать приложение](https://api.superjob.ru/register/) и получить ключ API
+4. Вставьте полученные ключи в файл `.env` в корневой директории проекта: 
+```
+SUPERJOB_API_KEY=ваш_ключ_api_от_superjob
+```
+5. Запустите нужный скрипт:
+```python
+python3 main.py
+```
 
 ## Результат
 Вывод информации о средней зарплате популярных языков программирования в вакансиях.  
