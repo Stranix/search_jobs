@@ -1,9 +1,10 @@
+import requests
 import schemas
 import services
 from parsers import super_job_api_parser
 
 
-def get_sj_vacancies_by_name_with_paginations(
+def get_sj_vacancies_by_name_with_pagination(
         name: str,
         api_token: str,
         search_params: dict
@@ -18,11 +19,16 @@ def get_sj_vacancies_by_name_with_paginations(
 
     while True:
         search_params['page'] = page
-        response_sj_api = services.send_request_to_sj_api(
-            api_token,
-            'vacancies',
-            search_params
-        )
+        url = f'https://api.superjob.ru/2.20/vacancies'
+        headers = {
+            'User-Agent': 'TestDev/1.0 (Phantom2525@gmail.com)',
+            'X-Api-App-Id': api_token
+        }
+
+        response = requests.get(url, headers=headers, params=search_params)
+        response.raise_for_status()
+        response_sj_api = response.json()
+
         for vacancy in response_sj_api['objects']:
             vacancies.append(
                 super_job_api_parser.parse_sj_response_vacancy(
@@ -44,7 +50,7 @@ def get_sj_vacancies_by_languages(
     vacancies_by_languages = {}
 
     for language in languages:
-        vacancies = get_sj_vacancies_by_name_with_paginations(
+        vacancies = get_sj_vacancies_by_name_with_pagination(
             language,
             api_token,
             search_params
