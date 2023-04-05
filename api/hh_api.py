@@ -50,7 +50,7 @@ def get_hh_vacancies_by_languages(
     vacancies_by_languages = {}
 
     for language in languages:
-        vacancies = get_hh_vacancies_by_name_with_paginations(
+        vacancies = get_hh_vacancies_by_name_with_pagination(
             language,
             search_params
         )
@@ -68,7 +68,7 @@ def get_hh_vacancies_by_languages(
     return vacancies_by_languages
 
 
-def get_hh_vacancies_by_name_with_paginations(
+def get_hh_vacancies_by_name_with_pagination(
         name: str,
         search_params: dict
 ) -> list[schemas.Vacancy]:
