@@ -5,43 +5,6 @@ import services
 from parsers import hh_api_parser
 
 
-def get_hh_industries() -> list[schemas.CompanyIndustry]:
-    url = 'https://api.hh.ru/industries'
-    headers = {
-        'User-Agent': 'TestDev/1.0 (Phantom2525@gmail.com)'
-    }
-
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
-    hh_api_response = response.json()
-
-    industries = []
-    for industry_area in hh_api_response:
-        company_industry = hh_api_parser.parse_hh_response_industry(
-            industry_area
-        )
-        industries.append(company_industry)
-
-    return industries
-
-
-def get_hh_industry_area_by_name(name: str) -> schemas.CompanyIndustry | None:
-    industries = get_hh_industries()
-
-    for industry_area in industries:
-        if industry_area.name == name:
-            return industry_area
-
-
-def get_hh_specialization_by_name(name: str) -> schemas.Specialization | None:
-    industries = get_hh_industries()
-
-    for industry in industries:
-        for specialization in industry.specializations:
-            if specialization.name == name:
-                return specialization
-
-
 def get_hh_vacancies_by_languages(
         languages: list[str],
         search_params: dict
@@ -80,7 +43,7 @@ def get_hh_vacancies_by_name_with_pagination(
 
     while page < pages_number:
         search_params['page'] = page
-        url = 'https://api.hh.ru/industries'
+        url = 'https://api.hh.ru/vacancies'
         headers = {
             'User-Agent': 'TestDev/1.0 (Phantom2525@gmail.com)'
         }
