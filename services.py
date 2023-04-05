@@ -40,7 +40,7 @@ def print_language_table(language_data: dict, table_name: str):
         'Вакансий обработано',
         'Средняя зарплата'
     ]
-    table_data = [headers]
+    table_row = [headers]
 
     for language, stats in language_data.items():
         line = [
@@ -49,8 +49,8 @@ def print_language_table(language_data: dict, table_name: str):
             stats['vacancies_processed'],
             stats['average_salary']
         ]
-        table_data.append(line)
+        table_row.append(line)
 
-    table_instance = AsciiTable(table_data, table_name)
+    table_instance = AsciiTable(table_row, table_name)
 
     print(table_instance.table, end='\n\n')
