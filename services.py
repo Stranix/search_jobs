@@ -24,10 +24,10 @@ def get_average_salary(
 
 
 def predict_salary(vacancy: schemas.Vacancy) -> float:
-    if vacancy.salary.s_from is None:
+    if not vacancy.salary.s_from:
         return float(vacancy.salary.to * 0.8)
 
-    if vacancy.salary.to is None:
+    if not vacancy.salary.to:
         return float(vacancy.salary.s_from * 1.2)
 
     return float((vacancy.salary.s_from + vacancy.salary.to) / 2)
