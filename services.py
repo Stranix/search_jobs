@@ -3,39 +3,10 @@ import schemas
 from terminaltables import AsciiTable
 
 
-def send_request_to_hh_api(point: str, params: dict = None) -> dict:
-    url = f'https://api.hh.ru/{point}'
-    headers = {
-        'User-Agent': 'TestDev/1.0 (Phantom2525@gmail.com)'
-    }
-    response = requests.get(url, headers=headers, params=params)
-    response.raise_for_status()
-
-    return response.json()
-
-
-def send_request_to_sj_api(
-        api_token: str,
-        point: str,
-        params: dict = None
-) -> dict:
-
-    url = f'https://api.superjob.ru/2.20/{point}'
-    headers = {
-        'User-Agent': 'TestDev/1.0 (Phantom2525@gmail.com)',
-        'X-Api-App-Id': api_token
-    }
-    response = requests.get(url, headers=headers, params=params)
-    response.raise_for_status()
-
-    return response.json()
-
-
 def get_average_salary(
         vacancies: list[schemas.Vacancy],
         currency: str = 'RUR'
 ) -> tuple[int, float]:
-
     salaries = []
 
     for vacancy in vacancies:
