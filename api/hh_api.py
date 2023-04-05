@@ -1,10 +1,19 @@
+import requests
+
 import schemas
 import services
 from parsers import hh_api_parser
 
 
 def get_hh_industries() -> list[schemas.CompanyIndustry]:
-    response_hh_api = services.send_request_to_hh_api('industries')
+    url = 'https://api.hh.ru/industries'
+    headers = {
+        'User-Agent': 'TestDev/1.0 (Phantom2525@gmail.com)'
+    }
+
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+    response_hh_api = response.json()
 
     industries = []
     for industry_area in response_hh_api:
@@ -71,10 +80,15 @@ def get_hh_vacancies_by_name_with_paginations(
 
     while page < pages_number:
         search_params['page'] = page
-        response_hh_api = services.send_request_to_hh_api(
-            'vacancies',
-            search_params
-        )
+        url = 'https://api.hh.ru/industries'
+        headers = {
+            'User-Agent': 'TestDev/1.0 (Phantom2525@gmail.com)'
+        }
+
+        response = requests.get(url, headers=headers, params=search_params)
+        response.raise_for_status()
+        response_hh_api = response.json()
+
         pages_number = int(response_hh_api['pages'])
         for vacancy in response_hh_api['items']:
             vacancies.append(
