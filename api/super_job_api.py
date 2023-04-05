@@ -27,15 +27,15 @@ def get_sj_vacancies_by_name_with_pagination(
 
         response = requests.get(url, headers=headers, params=search_params)
         response.raise_for_status()
-        response_sj_api = response.json()
+        sj_api_response = response.json()
 
-        for vacancy in response_sj_api['objects']:
+        for vacancy in sj_api_response['objects']:
             vacancies.append(
                 super_job_api_parser.parse_sj_response_vacancy(
                     vacancy
                 )
             )
-        if not response_sj_api['more']:
+        if not sj_api_response['more']:
             break
         page += 1
 

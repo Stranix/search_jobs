@@ -13,10 +13,10 @@ def get_hh_industries() -> list[schemas.CompanyIndustry]:
 
     response = requests.get(url, headers=headers)
     response.raise_for_status()
-    response_hh_api = response.json()
+    hh_api_response = response.json()
 
     industries = []
-    for industry_area in response_hh_api:
+    for industry_area in hh_api_response:
         company_industry = hh_api_parser.parse_hh_response_industry(
             industry_area
         )
