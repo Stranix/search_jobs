@@ -50,10 +50,10 @@ def get_hh_vacancies_by_name_with_pagination(
 
         response = requests.get(url, headers=headers, params=search_params)
         response.raise_for_status()
-        response_hh_api = response.json()
+        hh_api_response = response.json()
 
-        pages_number = int(response_hh_api['pages'])
-        for vacancy in response_hh_api['items']:
+        pages_number = int(hh_api_response['pages'])
+        for vacancy in hh_api_response['items']:
             vacancies.append(
                 hh_api_parser.parse_hh_response_vacancy(
                     vacancy
