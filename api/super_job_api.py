@@ -12,14 +12,14 @@ def get_sj_vacancies_by_name_with_pagination(
     page = 0
     vacancies = []
 
-    search_params.update({
-        'keywords': name,
-        'profession_only': '1'
-    })
+    search_params.update(
+        keyword=name,
+        profession_only=1
+    )
 
     while True:
         search_params['page'] = page
-        url = f'https://api.superjob.ru/2.20/vacancies'
+        url = 'https://api.superjob.ru/2.20/vacancies'
         headers = {
             'User-Agent': 'TestDev/1.0 (Phantom2525@gmail.com)',
             'X-Api-App-Id': api_token

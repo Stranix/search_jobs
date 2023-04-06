@@ -1,4 +1,3 @@
-import requests
 import schemas
 from terminaltables import AsciiTable
 
@@ -33,7 +32,11 @@ def predict_salary(vacancy: schemas.Vacancy) -> float:
     return float((vacancy.salary.s_from + vacancy.salary.to) / 2)
 
 
-def print_language_table(language_data: dict, table_name: str):
+def print_vacancies_with_average_salary_as_table(
+        vacancies_by_languages: dict,
+        table_name: str
+):
+
     headers = [
         'Язык программирования',
         'Вакансий найдено',
@@ -42,7 +45,7 @@ def print_language_table(language_data: dict, table_name: str):
     ]
     table_row = [headers]
 
-    for language, stats in language_data.items():
+    for language, stats in vacancies_by_languages.items():
         line = [
             language,
             stats['vacancies_found'],

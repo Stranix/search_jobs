@@ -47,8 +47,15 @@ def main():
         search_vacancies_sj_params
     )
 
-    services.print_language_table(hh_vacancies, 'HeadHunter Moscow')
-    services.print_language_table(sj_vacancies, 'SuperJob Moscow')
+    services.print_vacancies_with_average_salary_as_table(
+        hh_vacancies,
+        'HeadHunter Moscow'
+    )
+
+    services.print_vacancies_with_average_salary_as_table(
+        sj_vacancies,
+        'SuperJob Moscow'
+    )
 
 
 if __name__ == '__main__':
